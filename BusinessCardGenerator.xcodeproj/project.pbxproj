@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8D0DAA262BD6DDB5009D0004 /* Simulator Screenshot - iPhone 15 Pro - 2024-04-22 at 20.57.29.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D0DAA252BD6DDB5009D0004 /* Simulator Screenshot - iPhone 15 Pro - 2024-04-22 at 20.57.29.png */; };
 		8DEF7CB52BD6C573002B85F2 /* BusinessCardGeneratorApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DEF7CB42BD6C573002B85F2 /* BusinessCardGeneratorApp.swift */; };
 		8DEF7CB72BD6C573002B85F2 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DEF7CB62BD6C573002B85F2 /* ContentView.swift */; };
 		8DEF7CB92BD6C574002B85F2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8DEF7CB82BD6C574002B85F2 /* Assets.xcassets */; };
@@ -35,6 +36,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8D0DAA252BD6DDB5009D0004 /* Simulator Screenshot - iPhone 15 Pro - 2024-04-22 at 20.57.29.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Simulator Screenshot - iPhone 15 Pro - 2024-04-22 at 20.57.29.png"; sourceTree = "<group>"; };
 		8DEF7CB12BD6C573002B85F2 /* BusinessCardGenerator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BusinessCardGenerator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8DEF7CB42BD6C573002B85F2 /* BusinessCardGeneratorApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessCardGeneratorApp.swift; sourceTree = "<group>"; };
 		8DEF7CB62BD6C573002B85F2 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -73,9 +75,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8D0DAA242BD6DD94009D0004 /* Screenshots */ = {
+			isa = PBXGroup;
+			children = (
+				8D0DAA252BD6DDB5009D0004 /* Simulator Screenshot - iPhone 15 Pro - 2024-04-22 at 20.57.29.png */,
+			);
+			path = Screenshots;
+			sourceTree = "<group>";
+		};
 		8DEF7CA82BD6C572002B85F2 = {
 			isa = PBXGroup;
 			children = (
+				8D0DAA242BD6DD94009D0004 /* Screenshots */,
 				8DEF7CB32BD6C573002B85F2 /* BusinessCardGenerator */,
 				8DEF7CC92BD6C574002B85F2 /* BusinessCardGeneratorTests */,
 				8DEF7CD32BD6C574002B85F2 /* BusinessCardGeneratorUITests */,
@@ -234,6 +245,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8D0DAA262BD6DDB5009D0004 /* Simulator Screenshot - iPhone 15 Pro - 2024-04-22 at 20.57.29.png in Resources */,
 				8DEF7CBC2BD6C574002B85F2 /* Preview Assets.xcassets in Resources */,
 				8DEF7CB92BD6C574002B85F2 /* Assets.xcassets in Resources */,
 			);

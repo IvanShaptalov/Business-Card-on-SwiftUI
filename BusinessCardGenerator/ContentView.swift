@@ -5,6 +5,10 @@ struct ContentView: View {
     
     @State private var url = "https://realestatewithshayaan.com"
     
+    @MainActor func imageToShare() -> UIImage?{
+        return UIImage(data: generateQRCodeWithLogo(websiteLink: url, name: "Shayaan Siddiqui", email: "ssiddiqui@nexthomerepros.com", phone: "609.255-9635")!)
+    }
+    
     var body: some View {
         NavigationStack {
             VStack {
@@ -12,13 +16,29 @@ struct ContentView: View {
                     .textFieldStyle(.roundedBorder)
                     .padding()
                 
-                Image(uiImage: UIImage(data: generateQRCodeWithLogo(websiteLink: url, name: "Shayaan Siddiqui", email: "ssiddiqui@nexthomerepros.com", phone: "609.255-9635")!)!)
+                Image(uiImage: imageToShare()!)
                     .resizable()
-                    .frame(width: 300, height: 400)
+                    .frame(width: 300, height: 450)
+                
+                Button(action: shareImage) {
+                            Text("Share Image")
+                        }
+                
             }
             .navigationTitle("Business Card")
         }
     }
+    
+    @MainActor func shareImage() {
+            guard let image = imageToShare() else {
+                print("Image not found")
+                return
+            }
+            
+            let activityViewController = UIActivityViewController(activityItems: [image], applicationActivities: nil)
+        
+            UIApplication.shared.windows.first?.rootViewController?.present(activityViewController, animated: true, completion: nil)
+        }
     
     @MainActor
     func generateQRCodeWithLogo(websiteLink: String, name: String, email: String, phone: String) -> Data? {
