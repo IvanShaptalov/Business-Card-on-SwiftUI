@@ -12,7 +12,6 @@
 		8DEF7CB92BD6C574002B85F2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8DEF7CB82BD6C574002B85F2 /* Assets.xcassets */; };
 		8DEF7CBC2BD6C574002B85F2 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8DEF7CBB2BD6C574002B85F2 /* Preview Assets.xcassets */; };
 		8DEF7CBE2BD6C574002B85F2 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DEF7CBD2BD6C574002B85F2 /* Persistence.swift */; };
-		8DEF7CC12BD6C574002B85F2 /* BusinessCardGenerator.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8DEF7CBF2BD6C574002B85F2 /* BusinessCardGenerator.xcdatamodeld */; };
 		8DEF7CCB2BD6C574002B85F2 /* BusinessCardGeneratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DEF7CCA2BD6C574002B85F2 /* BusinessCardGeneratorTests.swift */; };
 		8DEF7CD52BD6C574002B85F2 /* BusinessCardGeneratorUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DEF7CD42BD6C574002B85F2 /* BusinessCardGeneratorUITests.swift */; };
 		8DEF7CD72BD6C574002B85F2 /* BusinessCardGeneratorUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DEF7CD62BD6C574002B85F2 /* BusinessCardGeneratorUITestsLaunchTests.swift */; };
@@ -42,7 +41,6 @@
 		8DEF7CB82BD6C574002B85F2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8DEF7CBB2BD6C574002B85F2 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		8DEF7CBD2BD6C574002B85F2 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
-		8DEF7CC02BD6C574002B85F2 /* BusinessCardGenerator.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BusinessCardGenerator.xcdatamodel; sourceTree = "<group>"; };
 		8DEF7CC62BD6C574002B85F2 /* BusinessCardGeneratorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BusinessCardGeneratorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8DEF7CCA2BD6C574002B85F2 /* BusinessCardGeneratorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessCardGeneratorTests.swift; sourceTree = "<group>"; };
 		8DEF7CD02BD6C574002B85F2 /* BusinessCardGeneratorUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BusinessCardGeneratorUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -102,7 +100,6 @@
 				8DEF7CB62BD6C573002B85F2 /* ContentView.swift */,
 				8DEF7CB82BD6C574002B85F2 /* Assets.xcassets */,
 				8DEF7CBD2BD6C574002B85F2 /* Persistence.swift */,
-				8DEF7CBF2BD6C574002B85F2 /* BusinessCardGenerator.xcdatamodeld */,
 				8DEF7CBA2BD6C574002B85F2 /* Preview Content */,
 			);
 			path = BusinessCardGenerator;
@@ -266,7 +263,6 @@
 				8DEF7CBE2BD6C574002B85F2 /* Persistence.swift in Sources */,
 				8DEF7CB72BD6C573002B85F2 /* ContentView.swift in Sources */,
 				8DEF7CB52BD6C573002B85F2 /* BusinessCardGeneratorApp.swift in Sources */,
-				8DEF7CC12BD6C574002B85F2 /* BusinessCardGenerator.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -596,19 +592,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		8DEF7CBF2BD6C574002B85F2 /* BusinessCardGenerator.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				8DEF7CC02BD6C574002B85F2 /* BusinessCardGenerator.xcdatamodel */,
-			);
-			currentVersion = 8DEF7CC02BD6C574002B85F2 /* BusinessCardGenerator.xcdatamodel */;
-			path = BusinessCardGenerator.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = 8DEF7CA92BD6C573002B85F2 /* Project object */;
 }

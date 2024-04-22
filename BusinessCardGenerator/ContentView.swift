@@ -1,86 +1,94 @@
-//
-//  ContentView.swift
-//  BusinessCardGenerator
-//
-//  Created by PowerMac on 22.04.2024.
-//
-
+import CoreImage
+import CoreImage.CIFilterBuiltins
 import SwiftUI
-import CoreData
-
 struct ContentView: View {
-    @Environment(\.managedObjectContext) private var viewContext
-
-    @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \Item.timestamp, ascending: true)],
-        animation: .default)
-    private var items: FetchedResults<Item>
-
+    
+    @State private var url = "https://realestatewithshayaan.com"
+    
     var body: some View {
-        NavigationView {
-            List {
-                ForEach(items) { item in
-                    NavigationLink {
-                        Text("Item at \(item.timestamp!, formatter: itemFormatter)")
-                    } label: {
-                        Text(item.timestamp!, formatter: itemFormatter)
-                    }
-                }
-                .onDelete(perform: deleteItems)
+        NavigationStack {
+            VStack {
+                TextField("Enter your link", text: $url)
+                    .textFieldStyle(.roundedBorder)
+                    .padding()
+                
+                Image(uiImage: UIImage(data: generateQRCodeWithLogo(websiteLink: url, name: "Shayaan Siddiqui", email: "ssiddiqui@nexthomerepros.com", phone: "609.255-9635")!)!)
+                    .resizable()
+                    .frame(width: 300, height: 400)
             }
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    EditButton()
-                }
-                ToolbarItem {
-                    Button(action: generateCard) {
-                        Label("Add Item", systemImage: "plus")
-                    }
-                }
-            }
-            Text("Select an item")
+            .navigationTitle("Business Card")
         }
     }
-
-    private func generateCard() {
-        withAnimation {
-            let newItem = Item(context: viewContext)
-            newItem.timestamp = Date()
-
-            do {
-                try viewContext.save()
-            } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                let nsError = error as NSError
-                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-            }
+    
+    @MainActor
+    func generateQRCodeWithLogo(websiteLink: String, name: String, email: String, phone: String) -> Data? {
+        // Create QR code
+        let filter = CIFilter.qrCodeGenerator()
+        guard let data = websiteLink.data(using: .ascii, allowLossyConversion: false) else { return nil }
+        filter.message = data
+        guard let ciimage = filter.outputImage else { return nil }
+        let transform = CGAffineTransform(scaleX: 12, y: 12)
+        let scaledCIImage = ciimage.transformed(by: transform)
+        let qrCodeImage = UIImage(ciImage: scaledCIImage)
+        
+        // Load custom logo
+        let logoImage = Image("NextHomeLogo")
+        let logoSize = CGSize(width: 100, height: 100)
+        guard let uiLogoImage = logoImage.getUIImage(newSize: logoSize) else {
+            return nil
         }
-    }
-
-    private func deleteItems(offsets: IndexSet) {
-        withAnimation {
-            offsets.map { items[$0] }.forEach(viewContext.delete)
-
-            do {
-                try viewContext.save()
-            } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                let nsError = error as NSError
-                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-            }
-        }
+        
+        // Text attributes
+        let textAttributes: [NSAttributedString.Key: Any] = [
+            .font: UIFont.systemFont(ofSize: 20),
+            .foregroundColor: UIColor.orange
+        ]
+        
+        let blackTextAttributes: [NSAttributedString.Key: Any] = [
+            .font: UIFont.systemFont(ofSize: 16),
+            .foregroundColor: UIColor.black
+        ]
+        
+        // Calculate total height of logo and text
+        let totalHeight = uiLogoImage.size.height + 100 // 100 is an arbitrary value, adjust as needed
+        
+        // Draw text
+        let imageSize = CGSize(width: max(uiLogoImage.size.width, qrCodeImage.size.width), height: totalHeight + qrCodeImage.size.height)
+        UIGraphicsBeginImageContextWithOptions(imageSize, false, 0.0)
+        
+        // Draw logo
+        uiLogoImage.draw(at: CGPoint(x: (imageSize.width - uiLogoImage.size.width) / 2, y: 0))
+        
+        // Draw name
+        let nameText = NSAttributedString(string: name, attributes: textAttributes)
+        nameText.draw(at: CGPoint(x: (imageSize.width - nameText.size().width) / 2, y: uiLogoImage.size.height))
+        
+        // Draw phone
+        let phoneText = NSAttributedString(string: phone, attributes: blackTextAttributes)
+        phoneText.draw(at: CGPoint(x: (imageSize.width - phoneText.size().width) / 2, y: uiLogoImage.size.height + 25)) // Adjust the y position as needed
+        
+        // Draw email
+        let emailText = NSAttributedString(string: email, attributes: blackTextAttributes)
+        emailText.draw(at: CGPoint(x: (imageSize.width - emailText.size().width) / 2, y: uiLogoImage.size.height + 50)) // Adjust the y position as needed
+        
+        // Draw QR code
+        qrCodeImage.draw(at: CGPoint(x: (imageSize.width - qrCodeImage.size.width) / 2, y: totalHeight)) // Adjust the y position as needed
+        
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return newImage?.pngData()
     }
 }
 
-private let itemFormatter: DateFormatter = {
-    let formatter = DateFormatter()
-    formatter.dateStyle = .short
-    formatter.timeStyle = .medium
-    return formatter
-}()
 
-#Preview {
-    ContentView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+extension Image {
+    @MainActor
+    func getUIImage(newSize: CGSize) -> UIImage? {
+        let image = resizable()
+            .scaledToFill()
+            .frame(width: newSize.width, height: newSize.height)
+            .clipped()
+        return ImageRenderer(content: image).uiImage
+    }
 }
